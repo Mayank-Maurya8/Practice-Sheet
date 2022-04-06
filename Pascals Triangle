@@ -1,0 +1,19 @@
+class solution{
+public:
+	vector<vector<int>> pascaltriangle(int numRows){
+		// we take the 2d array to store each row of the triangle
+		vector<vector<int>> v(numRows);
+		for(int i=0; i<numRows; i++){
+			// we resize each row to the specific size needed in the triangle
+			v[i].resize(i+1);
+			// make the first and last element of each row as 1
+			v[i][0] =v[i][i] = 1;
+
+			for(int j=1;j<i;j++){
+				// we will add the above two elements due to which the element is created 
+				v[i][j] = v[i-1][j] + v[i-1][j-1];
+			}
+		}
+		return v;
+	}
+};
