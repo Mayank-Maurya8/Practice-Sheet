@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size(), k, l;
+        // here we take k as the element from which we will perform sort of "break" logic
+        // where as l will be that element which will replace the break element 
+        for(k = n-2; k>=0; k--){
+            // here we will linearly traverse from back in order to get the element which is smaller than its previous element with respect to the back traversal
+            if(nums[k] < nums[k+1]){
+                break;
+            }
+        }
+        if(k < 0){
+            // simple reverse the permutation if there is no break point as this means that its the last possible perm
+            reverse(nums.begin(), nums.end());
+        } else {
+            // else we will now find the first number greater than the break element and then swap that digit 
+            for(l = n-1; l>k; l--){
+                if(nums[l] > nums[k])
+                    break;
+            }
+            swap(nums[k], nums[l]);
+            // after swaping we will simply perform reversal of the elements next to the break indexa
+            reverse(nums.begin() + k +1, nums.end());
+        }
+    }
+};
