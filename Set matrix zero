@@ -1,0 +1,47 @@
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        // we take this col0 inorder to mark the first column if the there consists any zero there 
+        int col0 = 1;
+        int r = matrix.size() , c = matrix[0].size();
+        for(int i=0;i<r;i++){
+            // if present we update the col0 and then we will update the matrix in the end 
+            if(matrix[i][0] == 0) col0 = 0;
+            for(int j = 1; j<c;j++){
+                // we check the element of the matric and then we assign the dummy row and col by 0
+                if(matrix[i][j] == 0){
+                    matrix[i][0] = matrix[0][j] = 0;
+                }
+            }
+        }
+        // we will linearly traverse in the reverse direction 
+        // otherwise there will be issue in the case of the edge case 
+        // [[1,1,1],[1,0,1],[0,1,1]]
+        // which will give the output as 
+        // 0 0 0 
+        // 0 0 0 
+        // 0 0 0
+        // instead of 
+        // 0 0 1 
+        // 0 0 0 
+        // 0 0 0 
+ 
+
+        for(int i = r-1;i>=0;i--){
+            for(int j=c-1;j>=1;j--){
+                // only traverse till the 1 column
+                if(matrix[0][j] == 0 || matrix[i][0] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+            // we will then update the first column of the matrix 
+            if(col0 == 0) matrix[i][0] = 0;
+        }
+        // for(int i=0;i<r;i++){
+        //     for(int j=0; j<c;j++){
+        //         cout << matrix[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
+    }
+};
