@@ -1,0 +1,66 @@
+// BRUTE FORCE O(N^3)
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxi = INT_MIN;
+        int sum =0;
+        for(int i=0;i<nums.size();i++){
+            for(int j=i;j<nums.size();i++){
+                for(int k=i;k<=j;j++){
+                    sum +=nums[k]; 
+                }
+                maxi = max(maxi,sum);
+            }
+        }
+        return maxi;
+    }
+};
+
+// BRUTE FORCE O(N^2)
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxi = INT_MIN;
+        
+        for(int i=0;i<nums.size();i++){
+            int sum =0;
+            for(int j=i;j<nums.size();i++){
+                sum += nums[j];
+                // for(int k=i;k<=j;j++){
+                //     sum +=nums[k]; 
+                // }
+                maxi = max(maxi,sum);
+            }
+        }
+        return maxi;
+    }
+};
+
+// KADANES ALGORITHM O(N) AND O(1)
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        // we take the max as the min val
+        int maxi = INT_MIN;
+        int sum =0;
+        for(auto it: nums){
+            // we take the sum of all the elements and then update the maxi if sum is greater than the maxi
+            sum += it;
+            maxi = max(maxi, sum);
+            // update sum if < 0
+            if(sum < 0) 
+                sum =0;
+        }
+        return maxi;
+    }
+};
+
+// when all the elements in the array is negative then then if you see the fragment
+// sum+=A[i];
+// ans=max(sum,ans);
+// sum=max(sum,0);
+// So, sum will always be negative, so it gets reset to 0, then in the next call, 
+// I mean at the next index, sum+=A[i] means sum has only A[i], then he is doing ans=max(sum,and) 
+// which gets the max out of previous A[i]'s and now A[i]. Again sum will be reset to 0 and this 
+// process goes on.. finally you have the element which is closer to 0.
