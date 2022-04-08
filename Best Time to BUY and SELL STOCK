@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int maxp = 0;
+        int mini = INT_MAX;
+        for(int i=0; i<prices.size(); i++){
+            // change the mini in order to get the minimum element of the prices as it will help in finding the maxp
+            mini = min(mini, prices[i]);
+            // then we will take the max difference between the elements and the min element (mini)
+            maxp = max(maxp, prices[i] - mini);
+        }
+        return maxp;
+    }
+};
