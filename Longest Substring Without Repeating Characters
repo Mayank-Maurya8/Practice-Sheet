@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> m(256, -1);
+        // make the map of all characters
+        int l=0, r=0;
+        int len = 0;
+        int n = s.size();
+        
+        // run the loop till the end element
+        while(r < n){
+            if(m[s[r]] != -1){
+                // if an element is already present then check
+                l = max(m[s[r]]+1 , l);
+                // if the value of one location ahead of already occured element or the left is already ahead of the r is max
+            }
+            // update the location of the element 
+            m[s[r]]  = r;
+            len = max(len, r-l+1);
+            r++;
+        }
+        return len;
+    }
+};
