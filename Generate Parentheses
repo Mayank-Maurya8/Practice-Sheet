@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        helper(res, "", n, n);
+        return res;
+    }
+    
+    void helper(vector<string> &res, string str, int open, int close){                
+        if(open==0 && close==0){
+            res.push_back(str);
+            return;
+        }
+        // we will decrement the open value
+        if(open>0){
+            helper(res, str+'(', open-1, close);
+        }
+        // we will only perform close operation when open<close this shows that there is more opening in the strings 
+        // so we can add closing and then we will be easily able to generate perfect parenthesis
+        if(close > 0 && open<close){
+            helper(res, str+')', open, close-1);            
+        }
+        
+    }
+};
