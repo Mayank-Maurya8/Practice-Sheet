@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> mergedintervals;
+        //for empty intervals
+        if(intervals.size() == 0){
+            return mergedintervals;
+        }
+        // we sort them first if it is already not sorted otherwise skip it 
+        sort(intervals.begin(), intervals.end());
+        vector<int> pairs = intervals[0];
+        
+        for(auto it: intervals){
+            // here we check if the pairs upper bound is greater than the intervals starting element 
+            // we do this as it is already sorted 
+            if(it[0] <= pairs[1] ){
+                pairs[1] = max(it[1],pairs[1]);
+            }
+            // otherwise just push the pair into the merged interval and push the interval into pairs
+            else {
+                mergedintervals.push_back(pairs);
+                pairs = it;
+            }
+        }
+        // push the remaing interval present in the pairs
+        mergedintervals.push_back(pairs);
+        return mergedintervals;
+    }
+};
