@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans;
+        unordered_map<int,int> mpp;
+        
+        for(auto i=0;i<nums.size();i++){
+            //here we check if the target - nums[i] is present or not 
+            if(mpp.find(target - nums[i]) != mpp.end()){
+                // we will push the index of numbers that make up the target into the ans
+                ans.push_back(mpp[target - nums[i]]);
+                ans.push_back(i);
+                // we return immediately as we know that there is exactly one pair that makes up the target
+                return ans;
+            }
+            mpp[nums[i]] = i;
+        }
+        return ans;
+    }
+};
