@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        // it can be done by two methods , sorting as well as by set .it can even be performed by set 
+        // sorting way
+        //takes o(nlogn)
+
+        // sort(nums.begin(), nums.end());
+        // int n = nums.size();
+        // for(int i=0;i<n-1;i++){
+        //     if(nums[i] == nums[i+1])
+        //         return true;
+        // }
+        // return false;
+        
+        //set method
+        // takes o(n) tc and o(n) sc 
+        set<int> ms;
+        int n = nums.size();
+        //here when we used for(auto it:nums) it was slower because 
+        for(auto& it: nums){
+            if(ms.find(it) != ms.end())
+                return true ;
+            ms.insert(it);
+        }
+        return false;
+    }
+};
