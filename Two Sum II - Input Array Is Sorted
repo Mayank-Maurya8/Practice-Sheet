@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        //two pointer approach
+        int i = 0 , j = numbers.size() -1;
+        while(i<j){
+            // we start at the two extreme ends and we try to move the pointers closer to each other in order to get the sum == target
+            int sum = numbers[i] + numbers[j];
+            if(sum == target) return {i+1,j+1};
+            // if sum is less then we will increment the left otherwise if greater we decrement the right
+            else if(sum < target) i++;
+            else j--;
+        }
+        return {};
+        // return {} is the way to initialize an array 
+        // we can create an array like this return {i,j,i..... so on}
+    }
+};
