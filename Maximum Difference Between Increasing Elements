@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maximumDifference(vector<int>& nums) {
+        int l = 0,r = 1;
+        int maxd = -1;
+        while(r < nums.size())
+        {
+            if(nums[l] < nums[r]){
+                int dif = nums[r] - nums[l];
+                maxd = max(dif, maxd);
+            } else {
+                l = r;
+            }
+            r++;
+        }     
+        return maxd;
+    }
+    
+};
