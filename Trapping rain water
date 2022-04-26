@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        //edge case
+        if(height.size() == 0)
+            return 0;
+        int l = 0, r = height.size() -1;
+        // take two max one for left and another one for the right 
+        int leftmax = height[l] , rightmax = height[r];
+        int res = 0;
+        while(l<r){
+            // we will update the leftmax and rightmax respectively
+            // it will updated by the max height till that iteration 
+            if(leftmax < rightmax){
+                l++;
+                leftmax = max(leftmax, height[l]);
+                res += leftmax - height[l];
+                // cout << res << "-" << " ";
+            } else {
+                r--;
+                rightmax = max(rightmax, height[r]);
+                res += rightmax - height[r];
+                // cout << res << "_"<<" ";
+            }
+            // whereas res will be updated by the difference , also there is no tension to resolve the negative cases due to the fact that we are updating the max values before calculating the res
+        }
+        return res;
+    }
+};
