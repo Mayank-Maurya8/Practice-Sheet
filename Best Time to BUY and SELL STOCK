@@ -12,3 +12,26 @@ public:
         return maxp;
     }
 };
+
+
+// ANOTHER SOLUTION //
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int l = 0,r=1;
+        int maxp = 0;
+        
+        while(r<prices.size()){
+            if(prices[l]<prices[r]){
+                int profit = prices[r] - prices[l];
+                maxp = max(maxp, profit);
+            } else {
+                // we will jump the l pointer to the r pointer location as that point will be the lowers
+                l = r;
+            }
+            r++;
+        }
+        return maxp;
+    }
+};
