@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        vector<int> count(26);
+        // create a map for the alphabets present in the string 
+        int maxf = 0, i=0, n=s.length();
+        for(int j=0;j<n;j++){
+            count[s[j] - 'A'] += 1;
+            // we will find the alphabet with the max frequency 
+            maxf = max(maxf, count[s[j] - 'A']);
+            while(j-i+1 > maxf+k){
+                // now we will check if the window length is greater than the maxfrequency + k 
+                // this is done so that we always get the count of the least freq characters which can be replaced 
+                --count[s[i++]-'A'];
+                // keep on updating the count of the characters till we satisfy the condition 
+            }
+        }
+        return n-i;
+    }
+};
