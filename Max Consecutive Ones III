@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int l =0, r=0;
+        int n = nums.size();
+        while(r < n){
+            if(nums[r] == 0) 
+                k--;
+            if(k < 0){
+                // we keep incrementing the left pointer till be find the subarray with positive k
+                if(nums[l] == 0){
+                    k++:
+                }
+                l++;
+            }
+            r++;
+        }
+        // r-l returns the max length of the consecutive 1
+        return r-l;
+    }
+};
