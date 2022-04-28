@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxRepeating(string sequence, string word) {
+        int ans = 0;
+        string temp = word;
+        // we find the temp from the sequence in one go 
+        // find traverses the whole string to find the temp 
+        while(sequence.find(temp) != string::npos){
+            ans++;
+            // thats why we add the strings up
+            temp += word;
+            // cout << temp;
+        }
+        return ans;
+    }
+};
