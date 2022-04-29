@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        // we assume that r is the max element of the pile whereas l is 1
+        int l = 1, r= *max_element(piles.begin(), piles.end());
+        // initially the answer will be r , which will then be updated as per h
+        int ans = r;
+        while(l<=r){
+            // we cal k , ans assume this as the time taken to finish a pile
+            int k  = (l+r) /2;
+            // cout << k;
+            int hour = 0;
+            for(auto p:piles){
+                // int s = p/k;
+                // for ceil function we can also write it as 
+                hour += (p+k-1)/k;
+            }
+            // we will shift the focus on either side of the sub array , so that we are able to determine the least value for k possible
+            if(hour<=h){
+                ans = min(ans, k);
+                r = k-1;
+            } else {
+                l = k+1;
+            }
+        }
+        return ans;
+    }
+};
