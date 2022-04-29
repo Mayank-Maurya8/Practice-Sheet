@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int l = 0, r = n -1;
+        while(l<=r){
+            // int m = (l+r)/2;
+            // alternative of division is right shift 
+            int m = (l+r) >> 1;
+            if(nums[m] == target)
+                return m;
+            // we will now check if the target belongs inbetween the subarrays of nums
+            // we will compare the target and based on that we will jump into the suitable subarray
+            
+            // left half is sorted
+            if(nums[l] <= nums[m]){
+                // check if the element belongs in the left half 
+                if(target >= nums[l] && target<=nums[m]){
+                    r = m -1;
+                } else {
+                    l = m+1;                    
+                }
+            } 
+            
+            // right half is sorted
+            else {
+                // check if the element belongs in the right half 
+                if(target >=nums[m] && target<=nums[r]){
+                    l = m+1;
+                } else {
+                    r = m-1;
+                }
+            }
+        }
+        return -1;        
+    }
+};
