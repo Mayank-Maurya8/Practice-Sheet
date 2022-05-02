@@ -8,7 +8,13 @@ public:
             int m = l + (r-l)/2;
             if(nums[m] == target)
                 return true;
+                
             // for edge cases [1,0,1,1,1] target = 0;
+            //The idea is to keep two pointers l = 0 , r = n-1
+            //And increase l untill it is the last occurance of nums[0]
+            //decrease r untill it is no longer equals nums[0]
+            //eg : 1,1,1,1,0,1,1,1,1,1 reduces to 1,0
+            
             else if(nums[l] == nums[m] && nums[m]== nums[r] ){
                 l++;r--;
             }
