@@ -1,0 +1,38 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    // we will make use of the concept that the fast pointer is pointing at the nth node , which means length - n traversal is still left
+    // we will now only traverse both the slow and the fast pointer 
+    // till fast pointer next is not null
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* start = new ListNode();
+        start->next = head;
+        ListNode* slow = start;
+        ListNode* fast = start;
+        
+        // we are going to iterate through the list 
+        for(int i=1;i<=n;i++){
+            fast = fast->next;
+        }
+        
+        while(fast->next!=NULL){
+            // we will then move the slow pointer 
+            slow = slow->next;
+            fast = fast->next;
+        }
+        // we will move the links
+        slow->next = slow->next->next;
+        // we will then print the start next
+        return start->next;
+        // return head;
+    }
+};
