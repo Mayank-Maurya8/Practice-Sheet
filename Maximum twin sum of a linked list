@@ -1,0 +1,55 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleele(ListNode* head){
+        // we will find middle element using the slow and fast pointer
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        while(slow && fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+    
+    ListNode* reversel(ListNode* head){
+        // we will reverse the second half of the array so that we are easy able to access the elements
+        ListNode* p = head;
+        // ListNode* q = NULL
+        // if(p->next == NULL)
+        //     return p;
+        ListNode* prev = NULL;
+        while(p!=NULL){
+            ListNode* nxt = p->next;
+            p->next = prev;
+            prev = p;
+            p = nxt;
+        }
+        return prev;
+    }
+    
+    int pairSum(ListNode* head) {           
+        ListNode* mid = middleele(head);
+        ListNode* f = head;
+        int ans =0;
+        ListNode* l = reversel(mid->next);
+        mid->next = NULL;
+        
+        while(f != NULL && l != NULL){
+            // we only select the max sum between the twins
+            ans = max(ans,f->val+l->val);
+            f= f->next;
+            l = l->next;
+        }
+        return ans;
+    }
+};
