@@ -1,0 +1,48 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if(!head || !head->next) return ;
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        // we will use two pointer technique to make two sub arrays
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        // we will stop the slow at the middle 
+        // we will assign the next element to the second 
+        ListNode* second = slow->next;
+        ListNode* prev = NULL;
+        slow->next = NULL;
+        // we are doing this so that we can reverse the second half of the array 
+        while(second){
+            ListNode* nxt = second->next;
+            second->next = prev;
+            prev = second;
+            second = nxt;
+        }
+        
+        ListNode* first = head;
+        second = prev;
+        
+        // then we will select alternative elements based on the second half 
+        while(second){
+            ListNode*tmp1 = first->next;
+            ListNode*tmp2 = second->next;
+            first->next = second;
+            second->next = tmp1;
+            first = tmp1;
+            second = tmp2;
+        }
+    }
+};
