@@ -1,0 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        // we created prehead to not hae problems that might arise due to empty list 
+        ListNode* prehead = new ListNode(0);
+        ListNode* p = prehead;
+        int extra = 0;
+        while(l1 || l2 || extra){
+            // we will simply add the val of the list if present , otherwise we will put 0 at that location 
+            int sum = (l1? l1->val : 0) + (l2? l2->val : 0) + extra;
+            // extra will contain the remianing elements of the sum 
+            extra = sum/10;
+            // we will simply make list with the help of p pointer and put unit place digit at that location
+            p->next = new ListNode(sum%10);
+            // we will then move the pointer to next location
+            p = p->next;
+            // if we traverse through the list , if we are on a node we will move to next node otherwise if we have reached NULL then we will let l1 have NULL value
+            // similar for l2
+            l1 = l1? l1->next:l1;
+            l2 = l2? l2->next:l2;
+        }
+        // we will return prehead ->next and not p as there might be a case of empty list
+        return prehead->next;
+    }
+};
