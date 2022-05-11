@@ -1,0 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        // this is for the case when list is empty or has one element 
+        if(head == NULL || head->next == NULL)
+            return NULL;
+        
+        // we take slow and fast to find the loop and we use entry to detect the entry point
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* entry = head;
+        while(fast->next && fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                // we will detect the loop 
+                while(slow!=entry){
+                    // now we move slow and entry one at a time to find the start of the loop 
+                    slow = slow->next;
+                    entry = entry->next;
+                }
+                return entry;
+            }
+        }
+        return NULL;
+    }
+};
